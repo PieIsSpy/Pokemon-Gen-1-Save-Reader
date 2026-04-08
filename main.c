@@ -2,17 +2,20 @@
 
 int main() {
     FILE *fp;
+    char name[10];
 
     fp = fopen("debug\\target.sav", "r");
 
     if (fp != NULL) {
-        printf("I exist! \n");
+        printf("Save File Recognized \n");
         printf("Position: %d \n", ftell(fp));
         fseek(fp, 0x2598, SEEK_SET);
-        printf("Position: %d", ftell(fp));
+        printf("Position: %d \n", ftell(fp));
+        fread(name, sizeof(name), 1, fp);
+        printf("Name: %s", name);
     }
     else {
-        printf("Where am i?");
+        printf("ERROR: FileNotFoundException");
     }
 
     fclose(fp);
