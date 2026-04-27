@@ -1,10 +1,26 @@
 #include <stdio.h>
 
+/*
+    This function converts a standard text char into an ASCII char.
+    If the standard text char cannot be represented by a valid ASCII char,
+    then it will return 0 instead.
+
+    @param c the read character
+    @returns the converted ASCII value
+*/
 char convert_char(char c) {
+    /*
+        A = 0xffffff80
+        Z = 0xffffff99
+    */
     if (c >= 0xffffff80 && c <= 0xffffff99) {
         return c - 0xffffff80 + 65;
     }
 
+    /*
+        a = 0xffffffa0
+        z = 0xffffffb9
+    */
     if (c >= 0xffffffa0 && c <= 0xffffffb9) {
         return c - 0xffffffa0 + 97;
     }
@@ -12,6 +28,14 @@ char convert_char(char c) {
     return 0;
 }
 
+/*
+    This function converts an entire string from standard text chars
+    into ASCII chars using `convert_char()`.
+
+    @param string the string to be converted
+    @param length the length of the string
+    @returns the converted string in ASCII values
+*/
 char* convert_text(char* string, int length) { 
     for (int i = 0; i < length; i++) {
         string[i] = convert_char(string[i]);
