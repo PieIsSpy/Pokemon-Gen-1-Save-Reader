@@ -10,9 +10,9 @@
 */
 char convert_char(char c) {
     char c_offset = c - 0xffffff00 - 63;
-    int is_big_or_small = (c_offset >= 65 && c_offset <= 90) || (c_offset >= 97 && c_offset <= 122);
+    int is_letter = (c_offset >= 65 && c_offset <= 90) || (c_offset >= 97 && c_offset <= 122);
 
-    if (is_big_or_small) {
+    if (is_letter) {
         return c_offset;
     }
 
