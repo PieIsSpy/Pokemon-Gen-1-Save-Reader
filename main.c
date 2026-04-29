@@ -9,20 +9,11 @@
     @returns the converted ASCII value
 */
 char convert_char(char c) {
-    /*
-        A = 0xffffff80
-        Z = 0xffffff99
-    */
-    if (c >= 0xffffff80 && c <= 0xffffff99) {
-        return c - 0xffffff80 + 65;
-    }
+    char c_offset = c - 0xffffff00 - 63;
+    int is_big_or_small = (c_offset >= 65 && c_offset <= 90) || (c_offset >= 97 && c_offset <= 122);
 
-    /*
-        a = 0xffffffa0
-        z = 0xffffffb9
-    */
-    if (c >= 0xffffffa0 && c <= 0xffffffb9) {
-        return c - 0xffffffa0 + 97;
+    if (is_big_or_small) {
+        return c_offset;
     }
 
     return 0;
@@ -55,16 +46,11 @@ int main() {
         fseek(fp, 0x2598, SEEK_SET);
         fread(name, sizeof(name), 1, fp);
 
-        for (int i = 0; i < 11; i++)
-            printf("%04x ", name[i]);
-
-        printf("\n");
-
-        printf("Name: %s", convert_text(name, 11));
+        printf("Name: %s \n", convert_text(name, 11));
         
     }
     else {
-        printf("ERROR: FileNotFoundException");
+        printf("ERROR: FileNotFoundException \n");
     }
 
     fclose(fp);
