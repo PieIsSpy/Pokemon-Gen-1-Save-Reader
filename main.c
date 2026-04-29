@@ -1,4 +1,5 @@
 #include <stdio.h>
+#define STANDARD_CHAR_OFFSET 0xffffff00
 
 /*
     This function converts a standard text char into an ASCII char.
@@ -9,11 +10,13 @@
     @returns the converted ASCII value
 */
 char convert_char(char c) {
-    char c_offset = c - 0xffffff00 - 63;
-    int is_letter = (c_offset >= 65 && c_offset <= 90) || (c_offset >= 97 && c_offset <= 122);
+    char c_offset = c - STANDARD_CHAR_OFFSET;
+
+    char letter_convert = c_offset - 63;
+    int is_letter = (letter_convert >= 65 && letter_convert <= 90) || (letter_convert >= 97 && letter_convert <= 122);
 
     if (is_letter) {
-        return c_offset;
+        return letter_convert;
     }
 
     return 0;
