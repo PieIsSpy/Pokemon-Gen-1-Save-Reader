@@ -15,11 +15,18 @@ char convert_char(char c) {
     char letter_convert = c_offset - 63;
     int is_letter = (letter_convert >= 65 && letter_convert <= 90) || (letter_convert >= 97 && letter_convert <= 122);
 
+    // return as a letter
     if (is_letter) {
         return letter_convert;
     }
 
-    return 0;
+    // 0x50 marks the end of a string
+    if (c == 0x50) {
+        return 0;
+    }
+
+    // anything else will be represented as space for now
+    return 32;
 }
 
 /*
@@ -42,7 +49,7 @@ int main() {
     FILE *fp;
     char name[11];
 
-    fp = fopen("debug\\target2.sav", "r");
+    fp = fopen("debug\\target3.sav", "r");
 
     if (fp != NULL) {
         printf("Save File Recognized \n");
