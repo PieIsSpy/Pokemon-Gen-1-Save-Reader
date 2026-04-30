@@ -1,8 +1,21 @@
+/*
+    This struct represents a Trainer.
+
+    @param name name of the trainer
+    @param id id of the trainer
+*/
 struct Trainer {
     char name[11];
     char id[2];
 } typedef Trainer;
 
+/*
+    This function gets the trainer's name and id from the save file
+    and stores them into a `Trainer` struct and returns it.
+
+    @param fp the save file to be read
+    @returns the trainer read from the save file.
+*/
 Trainer read_trainer(FILE* fp) {
     Trainer trainer;
 
