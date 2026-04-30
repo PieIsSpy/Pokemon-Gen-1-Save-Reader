@@ -1,4 +1,3 @@
-#define STANDARD_CHAR_OFFSET 0xffffff00
 #include <stdio.h>
 #include "char_converter.c"
 

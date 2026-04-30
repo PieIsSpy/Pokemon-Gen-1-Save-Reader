@@ -1,3 +1,5 @@
+#define STANDARD_CHAR_OFFSET 0xffffff00
+
 /*
     This function converts a standard text char into an ASCII char.
     If the standard text char cannot be represented by a valid ASCII char,
