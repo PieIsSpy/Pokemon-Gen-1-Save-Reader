@@ -48,8 +48,9 @@ char* convert_text(char* string, int length) {
 int main() {
     FILE *fp;
     char name[11];
+    char id[2];
 
-    fp = fopen("debug\\target3.sav", "r");
+    fp = fopen("debug\\target.sav", "r");
 
     if (fp != NULL) {
         printf("Save File Recognized \n");
@@ -57,6 +58,10 @@ int main() {
         fread(name, sizeof(name), 1, fp);
 
         printf("Name: %s \n", convert_text(name, 11));
+
+        fseek(fp, 0x2605, SEEK_SET);
+        fread(id, sizeof(id), 1, fp);
+        printf("ID: %d \n", id);
         
     }
     else {
