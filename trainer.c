@@ -21,6 +21,7 @@ Trainer read_trainer(FILE* fp) {
 
     fseek(fp, 0x2598, SEEK_SET);
     fread(trainer.name, sizeof(trainer.name), 1, fp);
+    strcpy(trainer.name, convert_text(trainer.name, 11));
 
     fseek(fp, 0x2605, SEEK_SET);
     fread(trainer.id, sizeof(trainer.id), 1, fp);
