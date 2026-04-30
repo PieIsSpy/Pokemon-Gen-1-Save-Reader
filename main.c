@@ -1,23 +1,19 @@
 #include <stdio.h>
 #include "char_converter.c"
+#include "trainer.c"
 
 int main() {
     FILE *fp;
-    char name[11];
-    char id[2];
+    Trainer trainer;
 
     fp = fopen("debug\\target.sav", "r");
 
     if (fp != NULL) {
         printf("Save File Recognized \n");
-        fseek(fp, 0x2598, SEEK_SET);
-        fread(name, sizeof(name), 1, fp);
+        trainer = read_trainer(fp);
 
-        printf("Name: %s \n", convert_text(name, 11));
-
-        fseek(fp, 0x2605, SEEK_SET);
-        fread(id, sizeof(id), 1, fp);
-        printf("ID: %d \n", id);
+        printf("Name: %s \n", convert_text(trainer.name, 11));
+        printf("ID: %d \n", trainer.id);
         
     }
     else {
