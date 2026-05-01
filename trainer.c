@@ -6,7 +6,7 @@
 */
 struct Trainer {
     char name[11];
-    char id[2];
+    uint16_t id;
 } typedef Trainer;
 
 /*
@@ -24,7 +24,8 @@ Trainer read_trainer(FILE* fp) {
     strcpy(trainer.name, convert_text(trainer.name, 11));
 
     fseek(fp, 0x2605, SEEK_SET);
-    fread(trainer.id, sizeof(trainer.id), 1, fp);
+    fread(&trainer.id, sizeof(trainer.id), 1, fp);
+    trainer.id = swap16(trainer.id);
 
     return trainer;
 }
