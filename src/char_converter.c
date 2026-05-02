@@ -1,4 +1,6 @@
-#define STANDARD_CHAR_OFFSET 0xffffff00
+#include <stdint.h>
+#include "../includes/char_converter.h"
+#include "../includes/bit_manipulations.h"
 
 /*
     This function converts a standard text char into an ASCII char.

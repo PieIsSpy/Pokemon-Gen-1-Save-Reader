@@ -1,3 +1,6 @@
+#include <stdint.h>
+#include "../includes/bit_manipulations.h"
+
 /*
     This function reverses the byte order of a 16 bit
     unsigned int.

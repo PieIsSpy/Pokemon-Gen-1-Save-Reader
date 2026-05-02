@@ -1,13 +1,9 @@
-/*
-    This struct represents a Trainer.
-
-    @param name name of the trainer
-    @param id id of the trainer
-*/
-struct Trainer {
-    char name[11];
-    uint16_t id;
-} typedef Trainer;
+#include <stdio.h>
+#include <string.h>
+#include <stdint.h>
+#include "../includes/char_converter.h"
+#include "../includes/bit_manipulations.h"
+#include "../includes/trainer.h"
 
 /*
     This function gets the trainer's name and id from the save file
