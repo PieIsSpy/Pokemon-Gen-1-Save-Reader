@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdint.h>
 #include "../includes/char_converter.h"
 #include "../includes/bit_manipulations.h"
@@ -15,7 +14,7 @@ int main() {
         printf("Save File Recognized \n");
         trainer = read_trainer(fp);
 
-        printf("Name: %s \n", trainer.name);
+        printf("Name: %s \n", convert_text(trainer.name, 11));
         printf("ID: %d \n", trainer.id);
         
     }

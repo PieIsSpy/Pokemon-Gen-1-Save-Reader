@@ -8,7 +8,7 @@
     @param id id of the trainer
 */
 typedef struct {
-    char name[11];
+    uint8_t name[11];
     uint16_t id;
 } Trainer;
 
