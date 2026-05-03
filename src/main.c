@@ -14,9 +14,7 @@ int main() {
         printf("Save File Recognized \n");
         trainer = read_trainer(fp);
 
-        printf("Name: %s \n", convert_text(trainer.name, 11));
-        printf("ID: %d \n", trainer.id);
-        
+        print_trainer(trainer);
     }
     else {
         printf("ERROR: FileNotFoundException \n");

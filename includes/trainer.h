@@ -13,5 +13,6 @@ typedef struct {
 } Trainer;
 
 Trainer read_trainer(FILE* fp);
+void print_trainer(Trainer trainer);
 
 #endif

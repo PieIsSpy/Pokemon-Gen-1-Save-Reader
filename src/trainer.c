@@ -24,3 +24,8 @@ Trainer read_trainer(FILE* fp) {
 
     return trainer;
 }
+
+void print_trainer(Trainer trainer) {
+    printf("Name: %s \n", convert_text(trainer.name, 11));
+    printf("ID: %d \n", trainer.id);
+}
