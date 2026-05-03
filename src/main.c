@@ -7,8 +7,12 @@
 int main() {
     FILE *fp;
     Trainer trainer;
+    char filename[255];
 
-    fp = fopen("debug\\target.sav", "r");
+    printf("Target Filename: ");
+    scanf(" %s", filename);
+
+    fp = fopen(filename, "r");
 
     if (fp != NULL) {
         printf("Save File Recognized \n");
