@@ -1,6 +1,10 @@
 #ifndef BOX_H
 #define BOX_H
 
+#include "bit_manipulations.h"
+#include "box_pokemon.h"
+
+#pragma pack(1)
 /*
     This structure represents a `Box` that can at most store 20 `Pokemon`s.
 
@@ -16,8 +20,12 @@ typedef struct {
     uint8_t species_ids[20];
     uint8_t padding;
     BoxPokemon pokemons[20];
-    uint8_t ot_names[11][20];
-    uint8_t pokemon_names[11][20];
+    uint8_t ot_names[20][11];
+    uint8_t pokemon_names[20][11];
 } Box;
+#pragma pack()
+
+Box read_box(FILE* fp, int box_num);
+void print_box(Box box);
 
 #endif

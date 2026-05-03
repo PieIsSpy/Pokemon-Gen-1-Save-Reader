@@ -56,4 +56,6 @@ typedef struct {
 } BoxPokemon;
 #pragma pack()
 
+BoxPokemon reformat_box_pokemon(BoxPokemon pkmn);
+
 #endif

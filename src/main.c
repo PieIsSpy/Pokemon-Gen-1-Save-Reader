@@ -3,14 +3,20 @@
 #include "../includes/char_converter.h"
 #include "../includes/bit_manipulations.h"
 #include "../includes/trainer.h"
+#include "../includes/box_pokemon.h"
+#include "../includes/box.h"
 
 int main() {
     FILE *fp;
     Trainer trainer;
     char filename[255];
+    int target_box;
+    Box box;
 
     printf("Target Filename: ");
     scanf(" %s", filename);
+
+    printf("\n");
 
     fp = fopen(filename, "r");
 
@@ -19,6 +25,21 @@ int main() {
         trainer = read_trainer(fp);
 
         print_trainer(trainer);
+        printf("\n");
+
+        while (target_box != -1) {
+            printf("Enter target box: ");
+            scanf(" %d", &target_box);
+
+            if (target_box != -1 && (target_box < 1 || target_box > 12)) {
+                printf("Not a valid box number\n");
+                printf("\n");
+            }
+            else if (target_box >= 1 && target_box <= 12) {
+                box = read_box(fp, target_box);
+                print_box(box);
+            }
+        }
     }
     else {
         printf("ERROR: FileNotFoundException \n");
