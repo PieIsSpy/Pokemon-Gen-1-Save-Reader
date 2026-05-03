@@ -6,8 +6,9 @@
 Box read_box(FILE* fp, int box_num) {
     Box box;
     int start = (box_num < 7) ? 0x4000 : 0x6000;
+    int index = (box_num < 7) ? (box_num - 1) : (box_num - 7);
 
-    fseek(fp, start + (0x462 * (box_num - 1)), SEEK_SET);
+    fseek(fp, start + (0x462 * index), SEEK_SET);
     fread(&box, sizeof(Box), 1, fp);
 
     for (int i = 0; i < box.pokemon_count; i++) {
