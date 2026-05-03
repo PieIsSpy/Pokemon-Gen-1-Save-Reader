@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdlib.h>
 #include "../includes/bit_manipulations.h"
 
 /*
@@ -20,8 +21,8 @@ uint16_t swap16(uint16_t x) {
     @param x the 24 bit unsigned int to be bit swapped
     @return returns the byte swapped 24 bit unsigned int
 */
-uint24_t* swap24(uint24_t x) {
-    uint24_t new;
+uint8_t* swap24(uint24_t x) {
+    uint8_t* new  = malloc(sizeof(uint8_t) * 3);;
     new[0] = x[2];
     new[1] = x[1];
     new[2] = x[1];

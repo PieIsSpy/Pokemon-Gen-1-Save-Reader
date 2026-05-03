@@ -4,6 +4,6 @@
 typedef uint8_t uint24_t[3];
 
 uint16_t swap16(uint16_t x);
-uint24_t* swap24(uint24_t x);
+uint8_t* swap24(uint24_t x);
 
 #endif
