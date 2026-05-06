@@ -1,6 +1,8 @@
 # Pokemon Gen 1 Save Reader
 A C program that reads a Pokemon Gen 1 Save File.
 
+**DISCLAIMER**: this repository does ***NOT*** contain any copy of any Pokemon games. Get your own copy.
+
 ### Features
 - Reads Player Info (Name and TID) from a save file
 - Reads `Box` Data Structure from a save file
@@ -22,6 +24,11 @@ The endianness of a Gen 1 save file is in Big Endian, so it is necessary to do b
 - `pokemon_names` contains the list of `Pokemon`s' nicknames
 
 The Current PC Box Number is stored in `0x284C`. Bits 0-6 stores the box number while the 7th bit indicates whether the trainer has switched boxes before. This data has a size of `0x2`, but only uses 8 bits. If a `Box` is the Current PC Box, then its data is stored in address `0x30C0` instead of Banks 2 (Stores Boxes 1-6) or 3 (Stores Boxes 7-12).
+
+### Known Issues
+- Some save files cannot properly display Pokemon nicknames from index 11 and above
+  - This may be due to how different architectures or emulators store the information of a .sav file
+  - This may be looked onto further in future iterations
 
 ## Commit Conventions
 The following commit conventions has been adopted from this [gist](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13).
