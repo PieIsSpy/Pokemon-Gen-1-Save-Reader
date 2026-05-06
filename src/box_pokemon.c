@@ -3,6 +3,13 @@
 #include "../includes/bit_manipulations.h"
 #include "../includes/box_pokemon.h"
 
+/*
+    This function reformats a `Pokemon`
+    by byte swapping its multibyte fields.
+
+    @param pkmn the `Pokemon` to reformat
+    @return the reformatted `Pokemon`
+*/
 BoxPokemon reformat_box_pokemon(BoxPokemon pkmn) {
     pkmn.curHP = swap16(pkmn.curHP);
     pkmn.tid = swap16(pkmn.tid);

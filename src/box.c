@@ -3,6 +3,12 @@
 #include "../includes/char_converter.h"
 #include "../includes/box.h"
 
+/*
+    This function reads a specified box in the save file.
+
+    @param fp the save file to read
+    @param box_num the box number to read
+*/
 Box read_box(FILE* fp, int box_num) {
     Box box = {0};
     uint16_t cur_box;
@@ -39,6 +45,11 @@ Box read_box(FILE* fp, int box_num) {
     return box;
 }
 
+/*
+    This function summarizes the contents of a box and prints it.
+
+    @param box the box to print
+*/
 void print_box(Box box) {
     printf("Pokemon Count: %d\n", box.pokemon_count);
     for (int i = 0; i < box.pokemon_count; i++) {

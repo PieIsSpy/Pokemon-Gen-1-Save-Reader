@@ -25,6 +25,11 @@ Trainer read_trainer(FILE* fp) {
     return trainer;
 }
 
+/*
+    This function prints a `Trainer`'s `name` and `id`.
+    
+    @param trainer the trainer to print
+*/
 void print_trainer(Trainer trainer) {
     printf("Name: %s \n", convert_text(trainer.name, 11));
     printf("ID: %d \n", trainer.id);
