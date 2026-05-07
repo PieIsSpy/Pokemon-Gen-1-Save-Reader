@@ -52,15 +52,25 @@ The following commit conventions has been adopted from this [gist](https://gist.
     <chore>: Commits that represent tasks like initial commit, modifying .gitignore, ...
 
 ## Prerequisites
-In order to be able to compile and build this program, you need to install `gcc` compiler and `make` build tool
+In order to be able to compile and build this program, you need to install a `gcc` compiler and `make` build tool. Additionally, you will have to install a `python` interpreter and have pip installed `requests` and `pandas` modules to generate `pkmn1.csv` for the main program to properly render Pokemon information.
 
 ## Make commands
 - `make all` compiles and builds the project into an `exe`
 - `make clean` clears all `obj` files and the `exe`
 - `make rebuild` automatically cleans and builds the project
 
+# Running the project
+Run `build.bat` or run the following commands in the command line:
+```
+make rebuild
+python pokemon_scraper.py
+make run
+```
+
 ## References
 - https://bulbapedia.bulbagarden.net/wiki/Save_data_structure_(Generation_I)
 - https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_structure_(Generation_I)
 - https://bulbapedia.bulbagarden.net/wiki/Stat
 - https://github.com/kwsch/PKHeX/blob/master/PKHeX.Core/Saves/Substructures/Gen12/SAV1Offsets.cs
+- https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_base_stats_in_Generation_I
+- https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_index_number_in_Generation_I
