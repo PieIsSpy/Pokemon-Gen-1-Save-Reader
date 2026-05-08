@@ -5,7 +5,7 @@
 /*
     This structure represents a `Pokemon` stored in a `Box`.
 
-    @param indexNum the index number of the Pokemon species
+    @param speciesId the index number of the Pokemon species
     @param curHP the current HP of the Pokemon
     @param levelRedundant a redundant level holder
     @param status the status condition of the Pokemon
@@ -30,7 +30,7 @@
     @param move4PP the PP info of move4
 */
 typedef struct {
-    uint8_t indexNum;
+    uint8_t speciesId;
     uint16_t curHP;
     uint8_t levelRedundant; // what the hell even is this
     uint8_t status;
