@@ -17,13 +17,13 @@ df_index.columns = df_index.columns.get_level_values(1)
 df_index = df_index.drop(columns=["HEX", "MS"])
 df_index = df_index.rename(columns={"Name": "Pokémon"})
 
-dfs_stats = pd.read_html(req1.text)[1]
-dfs_stats['Pokémon'] = dfs_stats["Pokémon.1"]
-dfs_stats = dfs_stats.drop(columns=["#", "Pokémon.1", "Total", "Average"])
+df_stats = pd.read_html(req1.text)[1]
+df_stats['Pokémon'] = df_stats["Pokémon.1"]
+df_stats = df_stats.drop(columns=["Pokémon.1", "Total", "Average"])
 
-df = pd.merge(dfs_stats, df_index, on='Pokémon')
-df = df.rename(columns={"Types": "Type1", "Types.1": "Type2"})
-df = df.loc[:, ["DEC", "Pokémon", "Type1", "Type2", "HP",  "Attack",  "Defense",  "Speed",  "Special"]]
-df = df.reset_index().rename(columns={'index': 'DexNum'})
+df = pd.merge(df_stats, df_index, on='Pokémon')
+df = df.rename(columns={"#": "DexNum", "Types": "Type1", "Types.1": "Type2"})
+df = df.loc[:, ["DEC", "DexNum", "Pokémon", "Type1", "Type2", "HP",  "Attack",  "Defense",  "Speed",  "Special"]]
+df = df.set_index("DEC")
 df = df.sort_values(by=["DEC"])
-df.to_csv('pkmn1.csv', index=False)
+df.to_csv('pkmn1.csv')
