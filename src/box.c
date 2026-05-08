@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include "../includes/char_converter.h"
 #include "../includes/box.h"
 
@@ -53,8 +54,10 @@ Box read_box(FILE* fp, int box_num) {
 void print_box(Box box) {
     printf("Pokemon Count: %d\n", box.pokemon_count);
     for (int i = 0; i < box.pokemon_count; i++) {
-        printf("%i] %s \n", i+1, convert_text(box.pokemon_names[i], 11));
+        char* pkmn_name = convert_text(box.pokemon_names[i], 11);
+        printf("%i] %s \n", i+1, pkmn_name);
         printf("Species index: %02x\n", box.species_ids[i]);
+        free(pkmn_name);
     }
     printf("\n");
 }

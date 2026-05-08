@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include "../includes/char_converter.h"
 #include "../includes/bit_manipulations.h"
 #include "../includes/trainer.h"
@@ -31,6 +32,8 @@ Trainer read_trainer(FILE* fp) {
     @param trainer the trainer to print
 */
 void print_trainer(Trainer trainer) {
-    printf("Name: %s \n", convert_text(trainer.name, 11));
+    char* name = convert_text(trainer.name, 11);
+    printf("Name: %s \n", name);
     printf("ID: %d \n", trainer.id);
+    free(name);
 }
