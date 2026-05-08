@@ -18,7 +18,7 @@ int main() {
 
     printf("\n");
 
-    fp = fopen(filename, "r");
+    fp = fopen(filename, "rb");
 
     if (fp != NULL) {
         printf("Save File Recognized \n");
