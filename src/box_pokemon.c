@@ -13,7 +13,7 @@
     @return the reformatted `Pokemon`
 */
 BoxPokemon reformat_box_pokemon(BoxPokemon pkmn) {
-    uint24_t exp = swap24(pkmn.exp);
+    uint8_t* exp = swap24(pkmn.exp);
 
     pkmn.curHP = swap16(pkmn.curHP);
     pkmn.tid = swap16(pkmn.tid);
