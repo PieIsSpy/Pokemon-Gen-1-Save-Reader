@@ -45,30 +45,34 @@ PokemonSpecies fetch_species_info(uint8_t hex) {
                         break;
 
                     case 3:
-                        strcpy(species.type1, value);
+                        strcpy(species.growthRate, value);
                         break;
 
                     case 4:
-                        strcpy(species.type2, value);
+                        strcpy(species.type1, value);
                         break;
 
                     case 5:
-                        species.baseHP = atoi(value);
+                        strcpy(species.type2, value);
                         break;
 
                     case 6:
+                        species.baseHP = atoi(value);
+                        break;
+
+                    case 7:
                         species.baseAtk = atoi(value);
                         break;
                     
-                    case 7:
+                    case 8:
                         species.baseDef = atoi(value);
                         break;
 
-                    case 8:
+                    case 9:
                         species.baseSpd = atoi(value);
                         break;
 
-                    case 9:
+                    case 10:
                         species.baseSpe = atoi(value);
                         break;
                 }
