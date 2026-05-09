@@ -4,8 +4,9 @@
 typedef struct {
     int dexNum;
     char speciesName[13];
-    char type1[8];
-    char type2[8];
+    char growthRate[12];
+    char type1[9];
+    char type2[9];
     int baseHP;
     int baseAtk;
     int baseDef;
