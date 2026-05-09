@@ -1,6 +1,8 @@
 #ifndef BOX_POKEMON_H
 #define BOX_POKEMON_H
 
+#include "../includes/bit_manipulations.h"
+
 #pragma pack(1)
 /*
     This structure represents a `Pokemon` stored in a `Box`.
@@ -57,5 +59,6 @@ typedef struct {
 #pragma pack()
 
 BoxPokemon reformat_box_pokemon(BoxPokemon pkmn);
+void print_box_pokemon(BoxPokemon pkmn, uint8_t* nickname, uint8_t* ot);
 
 #endif
