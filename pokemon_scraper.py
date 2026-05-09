@@ -24,15 +24,20 @@ req3 = requests.get(url_growth, headers=header)
 df_index = pd.read_html(req2.text)[0]
 df_index.columns = df_index.columns.get_level_values(1)
 df_index = df_index.drop(columns=["HEX", "MS"])
-df_index = df_index.rename(columns={"Name": "Pokémon"})
+df_index = df_index.rename(columns={"Name": "Pokemon"})
+df_index['Pokemon'] = df_index['Pokemon'].str.replace('Nidoran♂', 'NidoranM')
+df_index['Pokemon'] = df_index['Pokemon'].str.replace('Nidoran♀', 'NidoranF')
 
 # get the table for pokemon base stats
 df_stats = pd.read_html(req1.text)[1]
 df_stats['Pokémon'] = df_stats["Pokémon.1"]
+df_stats = df_stats.rename(columns={"Pokémon": "Pokemon"})
 df_stats = df_stats.drop(columns=["Pokémon.1", "Total", "Average"])
+df_stats['Pokemon'] = df_stats['Pokemon'].str.replace('Nidoran♂', 'NidoranM')
+df_stats['Pokemon'] = df_stats['Pokemon'].str.replace('Nidoran♀', 'NidoranF')
 
 # get the growth rate classification of each pokemon
-df_growth = pd.DataFrame(columns=["Pokémon", "GrowthRate"])
+df_growth = pd.DataFrame(columns=["Pokemon", "GrowthRate"])
 soup = BeautifulSoup(req3.text, "html.parser")
 growth_classifications = soup.find_all("div", {"class": target_div})
 
@@ -43,11 +48,16 @@ for growth in growth_classifications:
     for pkmn in pokemon:
         df_growth.loc[len(df_growth)] = [pkmn.text, heading.text]
 
+df_growth['GrowthRate'] = df_growth["GrowthRate"].str.replace(' ', '')
+df_growth['Pokemon'] = df_growth['Pokemon'].str.replace('Nidoran F', 'NidoranF')
+df_growth['Pokemon'] = df_growth['Pokemon'].str.replace('Nidoran M', 'NidoranM')
+df_growth['Pokemon'] = df_growth['Pokemon'].str.replace('Mr Mime', 'Mr. Mime')
+
 # combine all tables
-df = pd.merge(df_stats, df_index, on='Pokémon')
-df = pd.merge(df, df_growth, on='Pokémon')
+df = pd.merge(df_stats, df_index, on='Pokemon')
+df = pd.merge(df, df_growth, on='Pokemon')
 df = df.rename(columns={"#": "DexNum", "Types": "Type1", "Types.1": "Type2"})
-df = df.loc[:, ["DEC", "DexNum", "Pokémon", "GrowthRate", "Type1", "Type2", "HP",  "Attack",  "Defense",  "Speed",  "Special"]]
+df = df.loc[:, ["DEC", "DexNum", "Pokemon", "GrowthRate", "Type1", "Type2", "HP",  "Attack",  "Defense",  "Speed",  "Special"]]
 df = df.set_index("DEC")
 df = df.sort_values(by=["DEC"])
 
