@@ -25,6 +25,6 @@ uint8_t* swap24(uint24_t x) {
     uint8_t* new  = malloc(sizeof(uint8_t) * 3);;
     new[0] = x[2];
     new[1] = x[1];
-    new[2] = x[1];
+    new[2] = x[0];
     return new;
 }
