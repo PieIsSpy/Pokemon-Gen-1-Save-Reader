@@ -5,6 +5,12 @@
 #include <stdlib.h>
 #include "../includes/pokemon_species.h"
 
+/*
+    This function fetches a species' info using its index number and returns it.
+
+    @param hex the hexadecimal id to find
+    @returns the species' info
+*/
 PokemonSpecies fetch_species_info(uint8_t hex) {
     FILE* csv = fopen("pkmn1.csv", "r");
     PokemonSpecies species = {0};
