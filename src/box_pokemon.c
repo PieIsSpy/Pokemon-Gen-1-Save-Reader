@@ -38,7 +38,7 @@ void print_box_pokemon(BoxPokemon pkmn, uint8_t* nickname, uint8_t* ot) {
     char* ot_convert = convert_text(ot, 11);
 
     printf("%s | %s\n", nickname_convert, speciesInfo.speciesName);
-    printf("Lv. %d\n", pkmn.exp);
+    printf("Lv. %d\n", pkmn.level);
     printf("Dex Num: %d\n", speciesInfo.dexNum);
     printf("OT: %s\n", ot_convert);
     printf("Type: %s/%s\n", speciesInfo.type1, speciesInfo.type2);

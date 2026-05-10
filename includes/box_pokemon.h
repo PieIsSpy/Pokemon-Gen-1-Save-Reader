@@ -9,7 +9,7 @@
 
     @param speciesId the index number of the Pokemon species
     @param curHP the current HP of the Pokemon
-    @param levelRedundant a redundant level holder
+    @param level the level of the Pokemon
     @param status the status condition of the Pokemon
     @param type1 the 1st type of the Pokemon
     @param type2 the 2nd type of the Pokemon
@@ -34,7 +34,7 @@
 typedef struct {
     uint8_t speciesId;
     uint16_t curHP;
-    uint8_t levelRedundant; // what the hell even is this
+    uint8_t level;
     uint8_t status;
     uint8_t type1;
     uint8_t type2;

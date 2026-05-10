@@ -6,7 +6,6 @@
 
     @param dexNum the national dex number of the Pokemon
     @param speciesName the name of the Pokemon species
-    @param growthRate the growth rate type of the Pokemon
     @param type1 the 1st type of the Pokemon
     @param type2 the 2nd type of the Pokemon
     @param baseHP the base HP stat of the Pokemon
@@ -18,7 +17,6 @@
 typedef struct {
     int dexNum;
     char speciesName[13];
-    char growthRate[12];
     char type1[9];
     char type2[9];
     int baseHP;
