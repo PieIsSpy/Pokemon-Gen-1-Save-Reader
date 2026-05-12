@@ -1,6 +1,7 @@
 #ifndef BOX_POKEMON_H
 #define BOX_POKEMON_H
 
+#include <stdint.h>
 #include "../includes/bit_manipulations.h"
 
 #pragma pack(1)
