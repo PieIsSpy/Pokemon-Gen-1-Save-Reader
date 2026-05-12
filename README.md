@@ -6,6 +6,7 @@ A C program that reads a Pokemon Gen 1 Save File.
 ### Features
 - Reads Player Info (Name and TID) from a save file
 - Reads `Box` Data Structure from a save file
+- Reads `BoxPokemon` Data Structure and calculates its derived values
 
 ### Endianness
 The endianness of a Gen 1 save file is in Big Endian, so it is necessary to do byte swapping on multibyte data (assuming this program is being run on Windows, which is in Small Endian).
@@ -16,14 +17,42 @@ The endianness of a Gen 1 save file is in Big Endian, so it is necessary to do b
 - `id` is the ID of the trainer, found in address `0x2605`
 
 **Box**
-- `pokemon_count` counts the actual number of `Pokemon`s stored in a box
-- `species_ids` contains the list of `Pokemon` species inside the box
+- `pokemon_count` counts the actual number of `BoxPokemon`s stored in a box
+- `species_ids` contains the list of `BoxPokemon` species inside the box
 - `padding` is an unused padding
-- `pokemons` contains the list of `Pokemon` data structures
-- `ot_names` contains the list of `Pokemon`s' original trainer name
-- `pokemon_names` contains the list of `Pokemon`s' nicknames
+- `pokemons` contains the list of `BoxPokemon` data structures
+- `ot_names` contains the list of `BoxPokemon`s' original trainer name
+- `pokemon_names` contains the list of `BoxPokemon`s' nicknames
 
 The Current PC Box Number is stored in `0x284C`. Bits 0-6 stores the box number while the 7th bit indicates whether the trainer has switched boxes before. This data has a size of `0x2`, but only uses 8 bits. If a `Box` is the Current PC Box, then its data is stored in address `0x30C0` instead of Banks 2 (Stores Boxes 1-6) or 3 (Stores Boxes 7-12).
+
+**Box Pokemon**
+- `speciesId` is the index of the `BoxPokemon`'s species in Gen 1
+- `curHP` is the current HP of the `BoxPokemon`
+- `level` is the level of the `BoxPokemon`
+- `status` is the status condition of the `BoxPokemon`
+- `type1` and `type2` are the elemental types of the `BoxPokemon`
+- `catchRate` is the catch rate of the `BoxPokemon`'s species during capture (does not change after evolving)
+- `move1`, `move2`, `move3`, `move4` are the indices of the `BoxPokemon`'s moves
+- `tid` the `BoxPokemon`'s OT ID number
+- `exp` is the total experience points accumulated
+- `hpEV`, `atkEV`, `defEV`, `spdEV`, `speEV` are the EVs of the `BoxPokemon`
+- `ivs` are the IVs of the `BoxPokemon`
+- `move1PP`, `move2PP`, `move3PP`, `move4PP` are the PP information of the `BoxPokemon`'s moves
+
+The IVs of the `BoxPokemon` are stored as one whole 24 bytes of unsigned int. The order of the IVs are as follows: Attack (most significant byte), Defense, Speed and Special (least significant byte). The HP IV of the `BoxPokemon` is derived from getting all the least significant bits of all the bytes of the IV storage in the same order it was arranged.
+
+Since this program should not require a copy of the game, species index numbers, names, types and base stats were scraped from [bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Main_Page).
+
+The derived values are computed as follows:
+$$
+    \text{HP} = \lfloor \frac{((\text{Base} + \text{IV}) \times 2 + \lfloor \frac{\sqrt{EV}}{4} \rfloor) \times \text{Level}}{100} \rfloor + \text{Level} + 10
+
+    \\
+
+    \text{OtherStats} = \lfloor \frac{((\text{Base} + \text{IV}) \times 2 + \lfloor \frac{\sqrt{EV}}{4} \rfloor) \times \text{Level}}{100} \rfloor + 5
+$$
+Note: Square Roots are rounded up due to how assembly work.
 
 ## Commit Conventions
 The following commit conventions has been adopted from this [gist](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13).
@@ -69,5 +98,5 @@ make run
 - https://github.com/kwsch/PKHeX/blob/master/PKHeX.Core/Saves/Substructures/Gen12/SAV1Offsets.cs
 - https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_base_stats_in_Generation_I
 - https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_index_number_in_Generation_I
-- https://bulbapedia.bulbagarden.net/wiki/Experience
-- https://pokestats.gg/growth-rates
+- https://youtu.be/4WOPsz-KmYk
+- https://bulbapedia.bulbagarden.net/wiki/Individual_values
