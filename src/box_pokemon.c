@@ -33,6 +33,13 @@ BoxPokemon reformat_box_pokemon(BoxPokemon pkmn) {
     return pkmn;
 }
 
+/*
+    This function prints the detailed info of a `BoxPokemon`.
+
+    @param pkmn the `BoxPokemon` to print
+    @param nickname the nickname of the BoxPokemon
+    @param ot the name of the `BoxPokemon`'s Original Trainer Name
+*/
 void print_box_pokemon(BoxPokemon pkmn, uint8_t* nickname, uint8_t* ot) {
     PokemonSpecies speciesInfo = fetch_species_info(pkmn.speciesId);
     DerivedValues DVs = compute_dvs(pkmn, speciesInfo);
