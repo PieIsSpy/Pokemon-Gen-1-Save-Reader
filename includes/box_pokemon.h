@@ -60,6 +60,6 @@ typedef struct {
 #pragma pack()
 
 BoxPokemon reformat_box_pokemon(BoxPokemon pkmn);
-void print_box_pokemon(BoxPokemon pkmn, uint8_t* nickname, uint8_t* ot);
+void print_box_pokemon(BoxPokemon box_pkmn, uint8_t* nickname, uint8_t* ot);
 
 #endif

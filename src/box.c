@@ -23,11 +23,6 @@ Box read_box(FILE* fp, int box_num) {
         // check first if the target box is the current box
         if (box_num - 1 == (cur_box & 0x7F)) {
             fseek(fp, 0x30C0, SEEK_SET);
-
-            fread(&box, sizeof(Box), 1, fp);
-            for (int i = 0; i < box.pokemon_count; i++) {
-                box.pokemons[i] = reformat_box_pokemon(box.pokemons[i]);
-            }
         }
 
         // otherwise, check if the trainer has already switched to other boxes
@@ -36,12 +31,9 @@ Box read_box(FILE* fp, int box_num) {
             int index = (box_num < 7) ? (box_num - 1) : (box_num - 7);
 
             fseek(fp, start + (0x462 * index), SEEK_SET);
-
-            fread(&box, sizeof(Box), 1, fp);
-            for (int i = 0; i < box.pokemon_count; i++) {
-                box.pokemons[i] = reformat_box_pokemon(box.pokemons[i]);
-            }
         }
+
+        fread(&box, sizeof(Box), 1, fp);
     }
 
     return box;
@@ -55,8 +47,9 @@ Box read_box(FILE* fp, int box_num) {
 void print_box(Box box) {
     printf("Pokemon Count: %d\n", box.pokemon_count);
     for (int i = 0; i < box.pokemon_count; i++) {
-        printf("%d] ", i+1);
-        print_box_pokemon(box.pokemons[i], box.pokemon_names[i], box.ot_names[i]);
+        char* nickname = convert_text(box.pokemon_names[i], 11);
+        printf("%d] %s\n", i+1, nickname);
+        free(nickname);
     }
     printf("\n");
 }
