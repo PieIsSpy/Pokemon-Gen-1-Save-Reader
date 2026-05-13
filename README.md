@@ -45,13 +45,13 @@ The IVs of the `BoxPokemon` are stored as one whole 24 bytes of unsigned int. Th
 Since this program should not require a copy of the game, species index numbers, names, types and base stats were scraped from [bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Main_Page).
 
 The derived values are computed as follows:
-$$
-    \text{HP} = \lfloor \frac{((\text{Base} + \text{IV}) \times 2 + \lfloor \frac{\sqrt{EV}}{4} \rfloor) \times \text{Level}}{100} \rfloor + \text{Level} + 10
+```math
+\text{HP} = \lfloor \frac{((\text{Base} + \text{IV}) \times 2 + \lfloor \frac{\sqrt{EV}}{4} \rfloor) \times \text{Level}}{100} \rfloor + \text{Level} + 10
+```
 
-    \\
-
-    \text{OtherStats} = \lfloor \frac{((\text{Base} + \text{IV}) \times 2 + \lfloor \frac{\sqrt{EV}}{4} \rfloor) \times \text{Level}}{100} \rfloor + 5
-$$
+```math
+\text{OtherStats} = \lfloor \frac{((\text{Base} + \text{IV}) \times 2 + \lfloor \frac{\sqrt{EV}}{4} \rfloor) \times \text{Level}}{100} \rfloor + 5
+```
 Note: Square Roots are rounded up due to how assembly work.
 
 ## Commit Conventions
