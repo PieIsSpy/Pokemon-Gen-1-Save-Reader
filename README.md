@@ -46,11 +46,11 @@ Since this program should not require a copy of the game, species index numbers,
 
 The derived values are computed as follows:
 ```math
-\text{HP} = \lfloor \frac{((\text{Base} + \text{IV}) \times 2 + \lfloor \frac{\sqrt{EV}}{4} \rfloor) \times \text{Level}}{100} \rfloor + \text{Level} + 10
+\text{HP} = \bigg \lfloor \frac{((\text{Base} + \text{IV}) \times 2 + \lfloor \frac{\sqrt{EV}}{4} \rfloor) \times \text{Level}}{100} \bigg \rfloor + \text{Level} + 10
 ```
 
 ```math
-\text{OtherStats} = \lfloor \frac{((\text{Base} + \text{IV}) \times 2 + \lfloor \frac{\sqrt{EV}}{4} \rfloor) \times \text{Level}}{100} \rfloor + 5
+\text{OtherStats} = \bigg \lfloor \frac{((\text{Base} + \text{IV}) \times 2 + \lfloor \frac{\sqrt{EV}}{4} \rfloor) \times \text{Level}}{100} \bigg \rfloor + 5
 ```
 Note: Square Roots are rounded up due to how assembly work.
 
