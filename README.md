@@ -40,7 +40,7 @@ The Current PC Box Number is stored in `0x284C`. Bits 0-6 stores the box number 
 - `ivs` are the IVs of the `BoxPokemon`
 - `move1PP`, `move2PP`, `move3PP`, `move4PP` are the PP information of the `BoxPokemon`'s moves
 
-The IVs of the `BoxPokemon` are stored as one whole 24 bytes of unsigned int. The order of the IVs are as follows: Attack (most significant byte), Defense, Speed and Special (least significant byte). The HP IV of the `BoxPokemon` is derived from getting all the least significant bits of all the bytes of the IV storage in the same order it was arranged.
+The IVs of the `BoxPokemon` are stored as one whole 24 bits of unsigned int. The order of the IVs are as follows: Attack (most significant byte), Defense, Speed and Special (least significant byte). The HP IV of the `BoxPokemon` is derived from getting all the least significant bits of all the nibbles of the IV storage in the same order it was arranged.
 
 Since this program should not require a copy of the game, species index numbers, names, types and base stats were scraped from [bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Main_Page).
 
