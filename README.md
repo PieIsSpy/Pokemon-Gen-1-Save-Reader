@@ -9,7 +9,7 @@ A C program that reads a Pokemon Gen 1 Save File.
 - Reads `BoxPokemon` Data Structure and calculates its derived values
 
 ### Endianness
-The endianness of a Gen 1 save file is in Big Endian, so it is necessary to do byte swapping on multibyte data (assuming this program is being run on Windows, which is in Small Endian).
+The Endianness of a Gen 1 save file is in Big Endian, so it is necessary to do byte swapping on multibyte data (assuming this program is being run on Windows, which is in Small Endian).
 
 ### Data Structures
 **Trainer**
@@ -26,6 +26,8 @@ The endianness of a Gen 1 save file is in Big Endian, so it is necessary to do b
 
 The Current PC Box Number is stored in `0x284C`. Bits 0-6 stores the box number while the 7th bit indicates whether the trainer has switched boxes before. This data has a size of `0x2`, but only uses 8 bits. If a `Box` is the Current PC Box, then its data is stored in address `0x30C0` instead of Banks 2 (Stores Boxes 1-6) or 3 (Stores Boxes 7-12).
 
+To retain data integrity, names are only converted to ASCII if and only if it has to be displayed.
+
 **Box Pokemon**
 - `speciesId` is the index of the `BoxPokemon`'s species in Gen 1
 - `curHP` is the current HP of the `BoxPokemon`
@@ -39,6 +41,8 @@ The Current PC Box Number is stored in `0x284C`. Bits 0-6 stores the box number 
 - `hpEV`, `atkEV`, `defEV`, `spdEV`, `speEV` are the EVs of the `BoxPokemon`
 - `ivs` are the IVs of the `BoxPokemon`
 - `move1PP`, `move2PP`, `move3PP`, `move4PP` are the PP information of the `BoxPokemon`'s moves
+
+To retain data integrity, multibyte fields of `BoxPokemon` will only be reformatted to Small Endian if and only if it has to be displayed.
 
 The IVs of the `BoxPokemon` are stored as 2 bytes of unsigned int, with each nibble representing Attack (Most Significant Nibble), Defense, Speed and Special (Least Significant Nibble). The HP IV of the `BoxPokemon` is derived from getting all the least significant bits of all the nibbles of the IV storage in the same order it was arranged.
 
