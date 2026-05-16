@@ -3,3 +3,5 @@ debug
 obj
 *.sav
 *csv
+test*
+*.pkmn1
