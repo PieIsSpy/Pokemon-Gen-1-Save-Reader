@@ -3,9 +3,27 @@
 #include "../includes/box.h"
 #include "../includes/bit_manipulations.h"
 #include "../includes/box_pokemon.h"
+#include "../includes/pkmn1.h"
 
-void choose_pokemon(Box box) {
+void box_pokemon_options(PKMN1 pkmn) {
+    int action;
+
+    printf("1] Save\n");
+    printf("2] Exit\n");
+    while (action < 1 || action > 2) {
+        printf("Action: ");
+        scanf(" %d", &action);
+        printf("\n");
+
+        if (action == 1) {
+            save_pkmn1(pkmn);
+        }
+    }
+}
+
+void choose_box_pokemon(Box box) {
     int target_pokemon;
+    PKMN1 pkmn;
 
     while (target_pokemon != -1) {
         printf("Enter target pokemon (-1 to exit): ");
@@ -17,7 +35,10 @@ void choose_pokemon(Box box) {
             printf("\n");
         }
         else if (target_pokemon >= 1 && target_pokemon <= box.pokemon_count) {
-            print_box_pokemon(box.pokemons[target_pokemon - 1], box.pokemon_names[target_pokemon - 1], box.ot_names[target_pokemon - 1]);
+            pkmn = create_pkmn1(box.pokemons[target_pokemon - 1], box.pokemon_names[target_pokemon - 1], box.ot_names[target_pokemon - 1]);
+            print_box_pokemon(pkmn.pokemon, pkmn.nickname, pkmn.ot_name);
+            printf("\n");
+            box_pokemon_options(pkmn);
         }
     }
 }
@@ -38,7 +59,7 @@ void choose_box(FILE* fp) {
             printf("Box %d\n", target_box);
             box = read_box(fp, target_box);
             print_box(box);
-            choose_pokemon(box);
+            choose_box_pokemon(box);
         }
     }
 }
