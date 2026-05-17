@@ -60,7 +60,7 @@ void recalculate_checksum(FILE* fp, int box_num) {
     }
 
     // else, recalculate to banks 2 or 3
-    else if ((cur_box >> 7) == 1) {
+    else {
         recalculate_bank_checksum(fp, box_num);
     }
 }
