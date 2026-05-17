@@ -75,11 +75,13 @@ Box delete_box_pokemon(Box box, int index) {
     int i;
 
     for (i = index; i < box.pokemon_count - 1; i++) {
+        box.species_ids[i] = box.species_ids[i+1];
         box.pokemons[i] = box.pokemons[i+1];
         memcpy(box.pokemon_names[i], box.pokemon_names[i+1], sizeof(uint8_t) * 11);
         memcpy(box.ot_names[i], box.ot_names[i+1], sizeof(uint8_t) * 11);
     }
 
+    box.species_ids[i] = 0xFF;
     box.pokemons[i] = dummy;
     memset(box.pokemon_names[i], 0, 11);
     memset(box.ot_names[i], 0, 11);
