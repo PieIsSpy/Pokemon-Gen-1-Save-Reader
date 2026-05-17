@@ -35,6 +35,12 @@ void save_pkmn1(PKMN1 pkmn) {
     fclose(save);
 }
 
+/*
+    This function reads a .pkmn1 file and creates a `PKMN1` struct from reading it.
+
+    @param filename the file to read
+    @returns the constructed `PKMN1` struct
+*/
 PKMN1 read_pkmn1(char* filename) {
     FILE* fp = fopen(filename, "rb");
     PKMN1 pkmn = {0};
@@ -63,6 +69,11 @@ PKMN1 create_pkmn1(BoxPokemon pkmn, uint8_t* nickname, uint8_t* ot_name) {
     return save;
 }
 
+/*
+    This function prints out the given `PKMN1` structure.
+    
+    @param pkmn the Pokemon to be printed
+*/
 void print_pkmn1(PKMN1 pkmn) {
     print_box_pokemon(pkmn.pokemon, pkmn.nickname, pkmn.ot_name);
 }

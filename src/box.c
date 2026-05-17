@@ -57,6 +57,13 @@ Box read_box(FILE* fp, int box_num) {
     return box;
 }
 
+/*
+    This function overwrites a box into the savefile.
+
+    @param fp the save file to edit
+    @param box the box that will overwrite
+    @param box_num the box number to overwrite
+*/
 void write_box(FILE* fp, Box box, int box_num) {
     int offset = seek_box_offset(fp, box_num);
     fseek(fp, offset, SEEK_SET);
@@ -108,6 +115,13 @@ Box delete_box_pokemon(Box box, int index) {
     return box;
 }
 
+/*
+    This function imports a .pkmn1 file into a `Box` struct.
+
+    @param box the box to add the Pokemon to
+    @param pkmn the .pkmn1 file to import into the box
+    @returns the edited box with the imported Pokemon in it
+*/
 Box add_box_pokemon(Box box, PKMN1 pkmn) {
     box.species_ids[box.pokemon_count] = pkmn.pokemon.speciesId;
     box.pokemons[box.pokemon_count] = pkmn.pokemon;

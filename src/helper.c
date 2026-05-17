@@ -13,7 +13,7 @@
     This function withdraws a Pokemon from a Box and saves it into a .pkmn1 file.
 
     @param fp the save file to edit
-    @param box_num the box number to edit
+    @param box_num the box number of the box to edit
     @param pokemon_num the pokemon to withdraw
 */
 void withdraw_box_pokemon(FILE* fp, int box_num, int pokemon_num) {
@@ -25,6 +25,13 @@ void withdraw_box_pokemon(FILE* fp, int box_num, int pokemon_num) {
     recalculate_checksum(fp, box_num);
 }
 
+/*
+    This function deposits a Pokemon from a .pkmn1 file into a given box number and saves it.
+
+    @param fp the save file to edit
+    @param pkmn the .pkmn1 to import
+    @param box_num the box number of the box to edit
+*/
 void deposit_pkmn1(FILE* fp, PKMN1 pkmn, int box_num) {
     Box box = read_box(fp, box_num);
     box = add_box_pokemon(box, pkmn);
@@ -49,6 +56,9 @@ int box_pokemon_options() {
     return action;
 }
 
+/*
+    This function lets the user choose to whether deposit a Pokemon or not.
+*/
 int pkmn1_options() {
     int action = 0;
 
