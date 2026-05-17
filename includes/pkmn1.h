@@ -21,6 +21,8 @@ typedef struct {
 #pragma pack()
 
 void save_pkmn1(PKMN1 pkmn);
+PKMN1 read_pkmn1(char* filename);
 PKMN1 create_pkmn1(BoxPokemon pkmn, uint8_t* nickname, uint8_t* ot_name);
+void print_pkmn1(PKMN1 pkmn);
 
 #endif

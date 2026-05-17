@@ -5,6 +5,7 @@
 #include "../includes/char_converter.h"
 #include "../includes/box_pokemon.h"
 #include "../includes/box.h"
+#include "../includes/pkmn1.h"
 
 /*
     This function finds the offset for a given box number
@@ -78,7 +79,11 @@ void print_box(Box box) {
 }
 
 /*
+    This function deletes a `BoxPokmeon` from a `Box`.
 
+    @param box the box to be edited
+    @param index the index of the Pokemon to be deleted
+    @returns the edited box
 */
 Box delete_box_pokemon(Box box, int index) {
     BoxPokemon dummy = {0};
@@ -99,6 +104,21 @@ Box delete_box_pokemon(Box box, int index) {
     memset(box.ot_names[i], 0, 11);
 
     box.pokemon_count -= 1;
+
+    return box;
+}
+
+Box add_box_pokemon(Box box, PKMN1 pkmn) {
+    box.species_ids[box.pokemon_count] = pkmn.pokemon.speciesId;
+    box.pokemons[box.pokemon_count] = pkmn.pokemon;
+    memcpy(box.pokemon_names[box.pokemon_count], pkmn.nickname, sizeof(uint8_t) * 11);
+    memcpy(box.ot_names[box.pokemon_count], pkmn.ot_name, sizeof(uint8_t) * 11);
+
+    box.pokemon_count += 1;
+
+    if (box.pokemon_count < 20) {
+        box.species_ids[box.pokemon_count] = 0xFF;
+    }
 
     return box;
 }

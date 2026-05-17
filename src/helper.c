@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 #include "../includes/box.h"
 #include "../includes/bit_manipulations.h"
 #include "../includes/box_pokemon.h"
@@ -24,6 +25,13 @@ void withdraw_box_pokemon(FILE* fp, int box_num, int pokemon_num) {
     recalculate_checksum(fp, box_num);
 }
 
+void deposit_pkmn1(FILE* fp, PKMN1 pkmn, int box_num) {
+    Box box = read_box(fp, box_num);
+    box = add_box_pokemon(box, pkmn);
+    write_box(fp, box, box_num);
+    recalculate_checksum(fp, box_num);
+}
+
 /*
     This function lets the user choose to whether withdraw a Pokemon or not.
 */
@@ -41,8 +49,23 @@ int box_pokemon_options() {
     return action;
 }
 
+int pkmn1_options() {
+    int action = 0;
+
+    printf("1] Deposit\n");
+    printf("2] Exit\n");
+
+    while (action < 1 || action > 2) {
+        printf("Action: ");
+        scanf(" %d", &action);
+        printf("\n");
+    }
+
+    return action;
+}
+
 /*
-    This function lets the user choose whether to withdraw or deposit a Pokemon.
+    This function lets the user choose whether to withdraw or deposit a Pokemon in the current box.
 
     @param fp the save file to edit
     @param box the box to edit
@@ -50,7 +73,10 @@ int box_pokemon_options() {
 */
 void box_options(FILE* fp, Box box, int box_num) {
     int action = 0;
-    char filename[250] = {0};
+    int deposit_action = 0;
+    char filename[250];
+    PKMN1 pkmn;
+    PKMN1 dummy = {0};
 
     printf("1] Deposit\n");
     printf("2] Withdraw\n");
@@ -61,12 +87,34 @@ void box_options(FILE* fp, Box box, int box_num) {
         printf("\n");
 
         if (action == 1) {
-            // printf("Target Filename: ");
-            // scanf(" %s", filename);
-            printf("test\n");
+            if (box.pokemon_count == 20) {
+                printf("The box is already full\n");
+            } else {
+                printf("Target Filename: ");
+                scanf(" %s", filename);
+                pkmn = read_pkmn1(filename);
+                
+                if (memcmp(&pkmn, &dummy, sizeof(PKMN1)) == 0) {
+                    printf("File not found\n");
+                }
+                else {
+                    print_pkmn1(pkmn);
+                    deposit_action = pkmn1_options();
+
+                    if (deposit_action == 1) {
+                        deposit_pkmn1(fp, pkmn, box_num);
+                        printf("Pokemon deposited\n");
+                    }
+                }
+            }
         }
         else if (action == 2) {
-            choose_box_pokemon(fp, box, box_num);
+            if (box.pokemon_count == 0) {
+                printf("There's no Pokemon here\n");
+            }
+            else {
+                choose_box_pokemon(fp, box, box_num);
+            }
         }
     }
 }

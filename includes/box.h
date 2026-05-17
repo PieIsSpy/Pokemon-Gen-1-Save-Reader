@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "bit_manipulations.h"
 #include "box_pokemon.h"
+#include "pkmn1.h"
 
 #pragma pack(1)
 /*
@@ -31,5 +32,6 @@ Box read_box(FILE* fp, int box_num);
 void write_box(FILE* fp, Box box, int box_num);
 void print_box(Box box);
 Box delete_box_pokemon(Box box, int index);
+Box add_box_pokemon(Box box, PKMN1 pkmn);
 
 #endif

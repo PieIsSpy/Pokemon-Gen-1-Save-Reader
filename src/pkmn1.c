@@ -35,6 +35,16 @@ void save_pkmn1(PKMN1 pkmn) {
     fclose(save);
 }
 
+PKMN1 read_pkmn1(char* filename) {
+    FILE* fp = fopen(filename, "rb");
+    PKMN1 pkmn = {0};
+
+    if (fp != NULL) {
+        fread(&pkmn, sizeof(PKMN1), 1, fp);
+    }
+    return pkmn;
+}
+
 /*
     This function creates a PKMN1 struct from the given `BoxPokemon`, nickname and
     original trainer name.
@@ -51,4 +61,8 @@ PKMN1 create_pkmn1(BoxPokemon pkmn, uint8_t* nickname, uint8_t* ot_name) {
     memcpy(save.ot_name, ot_name, sizeof(uint8_t) * 11);
 
     return save;
+}
+
+void print_pkmn1(PKMN1 pkmn) {
+    print_box_pokemon(pkmn.pokemon, pkmn.nickname, pkmn.ot_name);
 }
