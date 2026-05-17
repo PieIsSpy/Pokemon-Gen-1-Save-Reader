@@ -3,11 +3,18 @@
 #include "../includes/box.h"
 #include "../includes/checksum.h"
 
+/*
+    This function recalculates the main data checksum starting from
+    player name to tileset type.
+
+    @param fp the file to recalculate its checksum
+*/
 void recalculate_main_checksum(FILE* fp) {
     uint8_t checksum = 0xff;
     uint8_t data;
 
     fseek(fp, 0x2598, SEEK_SET);
+    // for each byte from player name to tileset type, subtract to checksum
     for (int i = 0x2598; i <= 0x3522; i++) {
         fread(&data, sizeof(uint8_t), 1, fp);
         checksum -= data;
@@ -17,6 +24,14 @@ void recalculate_main_checksum(FILE* fp) {
     fwrite(&checksum, sizeof(uint8_t), 1, fp);
 }
 
+/*
+    This function recalculates edited box's checksum
+    and the overall bank checksum by summing each 
+    boxes' checksums.
+
+    @param fp the the to recalculate its checksum
+    @param box_num the number of the box that was edited
+*/
 void recalculate_bank_checksum(FILE* fp, int box_num) {
     uint8_t total_checksum = 0;
     uint8_t box_checksum = 0;
@@ -24,6 +39,8 @@ void recalculate_bank_checksum(FILE* fp, int box_num) {
 
     int box_offset = seek_box_offset(fp, box_num);
     fseek(fp, box_offset, SEEK_SET);
+
+    // for each byte from the offset up to its last byte, add to the checksum
     for (int i = 0; i < 0x462; i++) {
         fread(&data, sizeof(uint8_t), 1, fp);
         box_checksum += data;
@@ -36,6 +53,8 @@ void recalculate_bank_checksum(FILE* fp, int box_num) {
     fwrite(&box_checksum, sizeof(uint8_t), 1, fp);
 
     fseek(fp, starting_box_checksum_offset, SEEK_SET);
+
+    // for each checksums of each boxes, recalculate its overall bank checksum
     for (int i = 0; i < 7; i++) {
         fread(&data, sizeof(uint8_t), 1, fp);
         total_checksum += data;
@@ -47,6 +66,13 @@ void recalculate_bank_checksum(FILE* fp, int box_num) {
     fwrite(&total_checksum, sizeof(uint8_t), 1, fp);
 }
 
+/*
+    This function either recalculates the checksum
+    of the main data or either bank 2 or 3.
+
+    @param fp the file to recalculate its checksum
+    @param box_num the number of the box that was edited
+*/
 void recalculate_checksum(FILE* fp, int box_num) {
     uint16_t cur_box;
     fseek(fp, 0x284C, SEEK_SET);

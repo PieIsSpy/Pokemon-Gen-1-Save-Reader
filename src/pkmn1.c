@@ -7,6 +7,12 @@
 #include "../includes/box_pokemon.h"
 #include "../includes/pkmn1.h"
 
+/*
+    This function saves a `PKMN1` struct into a .pkmn1 file with the filename:
+    <nickname>_<dmY>_<HMS>.
+
+    @param pkmn the `PKMN` Pokemon to save as a file
+*/
 void save_pkmn1(PKMN1 pkmn) {
     FILE* save;
     char filename[250];
@@ -29,6 +35,15 @@ void save_pkmn1(PKMN1 pkmn) {
     fclose(save);
 }
 
+/*
+    This function creates a PKMN1 struct from the given `BoxPokemon`, nickname and
+    original trainer name.
+
+    @param pkmn the `BoxPokemon` struct of the Pokemon
+    @param nickname the nickname of the Pokemon
+    @param ot_name the name of the Pokemon's original trainer
+    @returns the `PKMN1` struct created
+*/
 PKMN1 create_pkmn1(BoxPokemon pkmn, uint8_t* nickname, uint8_t* ot_name) {
     PKMN1 save;
     save.pokemon = pkmn;

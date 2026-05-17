@@ -5,6 +5,14 @@
 #include "../includes/box_pokemon.h"
 
 #pragma pack(1)
+/*
+    This struct saves a Pokemon's `BoxPokemon` structure, its nickname
+    and its original trainer name
+
+    @param pokemon the `BoxPokemon` structure info of the Pokemon
+    @param nickname the nickname of the Pokemon
+    @param ot_name the name of its original trainer
+*/
 typedef struct {
     BoxPokemon pokemon;
     uint8_t nickname[11];

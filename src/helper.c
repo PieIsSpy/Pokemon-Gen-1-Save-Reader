@@ -8,6 +8,13 @@
 #include "../includes/helper.h"
 #include "../includes/checksum.h"
 
+/*
+    This function withdraws a Pokemon from a Box and saves it into a .pkmn1 file.
+
+    @param fp the save file to edit
+    @param box_num the box number to edit
+    @param pokemon_num the pokemon to withdraw
+*/
 void withdraw_box_pokemon(FILE* fp, int box_num, int pokemon_num) {
     Box box = read_box(fp, box_num);
     PKMN1 pkmn = create_pkmn1(box.pokemons[pokemon_num-1], box.pokemon_names[pokemon_num-1], box.ot_names[pokemon_num-1]);
@@ -17,6 +24,9 @@ void withdraw_box_pokemon(FILE* fp, int box_num, int pokemon_num) {
     recalculate_checksum(fp, box_num);
 }
 
+/*
+    This function lets the user choose to whether withdraw a Pokemon or not.
+*/
 int box_pokemon_options() {
     int action = 0;
 
@@ -31,6 +41,13 @@ int box_pokemon_options() {
     return action;
 }
 
+/*
+    This function lets the user choose whether to withdraw or deposit a Pokemon.
+
+    @param fp the save file to edit
+    @param box the box to edit
+    @param box_num the number of the box chosen
+*/
 void box_options(FILE* fp, Box box, int box_num) {
     int action = 0;
     char filename[250] = {0};
@@ -54,6 +71,13 @@ void box_options(FILE* fp, Box box, int box_num) {
     }
 }
 
+/*
+    This function lets the user choose which Pokemon to withdraw.
+
+    @param fp the save file to edit
+    @param box the box to edit
+    @param box_num the number of the box
+*/
 void choose_box_pokemon(FILE* fp, Box box, int box_num) {
     int target_pokemon = 0;
     int action = 0;
@@ -81,6 +105,11 @@ void choose_box_pokemon(FILE* fp, Box box, int box_num) {
     }
 }
 
+/*
+    This function lets the user choose a box to edit.
+
+    @param fp the save file to edit
+*/
 void choose_box(FILE* fp) {
     int target_box = 0;
     while (target_box != -1) {

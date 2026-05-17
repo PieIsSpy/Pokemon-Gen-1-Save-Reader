@@ -6,6 +6,13 @@
 #include "../includes/box_pokemon.h"
 #include "../includes/box.h"
 
+/*
+    This function finds the offset for a given box number
+
+    @param fp the file to search through
+    @param box_num the box number to find
+    @return the offset of the box
+*/
 int seek_box_offset(FILE* fp, int box_num) {
     uint16_t cur_box;
     fseek(fp, 0x284C, SEEK_SET);
@@ -70,10 +77,14 @@ void print_box(Box box) {
     printf("\n");
 }
 
+/*
+
+*/
 Box delete_box_pokemon(Box box, int index) {
     BoxPokemon dummy = {0};
     int i;
 
+    // shift everything down
     for (i = index; i < box.pokemon_count - 1; i++) {
         box.species_ids[i] = box.species_ids[i+1];
         box.pokemons[i] = box.pokemons[i+1];
@@ -81,6 +92,7 @@ Box delete_box_pokemon(Box box, int index) {
         memcpy(box.ot_names[i], box.ot_names[i+1], sizeof(uint8_t) * 11);
     }
 
+    // replace the end with 0s and terminating id
     box.species_ids[i] = 0xFF;
     box.pokemons[i] = dummy;
     memset(box.pokemon_names[i], 0, 11);
