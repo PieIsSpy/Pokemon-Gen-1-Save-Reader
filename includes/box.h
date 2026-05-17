@@ -1,6 +1,7 @@
 #ifndef BOX_H
 #define BOX_H
 
+#include <stdio.h>
 #include "bit_manipulations.h"
 #include "box_pokemon.h"
 
@@ -25,7 +26,10 @@ typedef struct {
 } Box;
 #pragma pack()
 
+int seek_box_offset(FILE* fp, int box_num);
 Box read_box(FILE* fp, int box_num);
+void write_box(FILE* fp, Box box, int box_num);
 void print_box(Box box);
+Box delete_box_pokemon(Box box, int index);
 
 #endif
